@@ -140,12 +140,12 @@ stats = { action = "bolt", ammo = 5, maxAmmo = 5, range = 400, damage = 80, reco
 tag = "berdan"
 based_on = "g98"
 name = "Berdan II"
-description = "Berdan II, an obsolete single-shot rifle found among Partizans. Fires a powerful black-powder cartridge, but requires reloading after every shot."
+description = "Berdan II, an obsolete single-shot rifle found among Partizans. Fires a powerful 10.7mm black-powder cartridge, but requires reloading after every shot."
 # top_sprite = "weapons/top_berdan.png"
 # side_sprite = "weapons/side_berdan.png"
 sound = "g98Sound"
 mag_sprite = "genericMag"
-stats = { action = "bolt", ammo = 1, maxAmmo = 1, range = 300, damage = 120, recoil = 15, bulk = 12.6, rof = 10, rofTime = 99, jam = 10, rgCapable = 0 }
+stats = { action = "bolt", ammo = 1, maxAmmo = 1, range = 300, damage = 150, recoil = 15, bulk = 12.6, rof = 10, rofTime = 99, jam = 10, rgCapable = 0 }
 
 [[weapons]]
 tag = "mosinBramit"
@@ -399,14 +399,13 @@ stats = { action = "semi", class = "atRifle", ammo = 5, maxAmmo = 5, range = 100
 
 # ---- Special and crate guns ----
 [[weapons]]
-tag = "tozB"
-based_on = "shotgun"
+reskin = "shotgun"
 name = "TOZ-B"
 description = "TOZ-B, double-barrel hunting shotgun, now primarily used by partisans. Close-range little marvel and capable of a quick second shot."
 top_sprite = "weapons/top_tozB.png"
 side_sprite = "weapons/side_tozB.png"
 sound = "shotGunSound"
-mag_sprite = "genericMag"
+mag_sprite = "shell"
 stats = { action = "semi", ammo = 2, maxAmmo = 2, range = 300, damage = 200, recoil = 20, bulk = 5, rof = 1, rofTime = 99, jam = 2, rgCapable = 0 }
 
 [[weapons]]
@@ -452,7 +451,7 @@ stats = { action = "auto", class = "lmg", ammo = 250, maxAmmo = 250, range = 375
 # allied, allied_sniper, grunt, para, resistance, smg, axis, axis_crew.
 # REAL: the three partisan weapons from the stats sheet. The vanilla pool already has the MP 40.
 [pools.resistance]           # weapons of the partisans (the vanilla French unit)
-add = ["berdan", "tozB", "ppshObrez"]
+add = ["berdan", "shotgun", "ppshObrez"]
 # remove = ["shotgun", "sten", "bren"]       # PLACEHOLDER: vanilla guns to take out of the pool
 
 # PLACEHOLDER: nothing decided for the other pools.
