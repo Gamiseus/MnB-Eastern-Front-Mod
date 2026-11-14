@@ -16,3 +16,30 @@ version = "1.0.0"
 # payload = '''
 # print("[Eastern Front] loaded")
 # '''
+
+[[patches]]
+[patches.pattern]
+id = "rkka:hello"
+target = "drawFiles.lua"
+pattern = 'love.graphics.print("URB and the MNB community presents", 500, 490)'
+position = "after"
+payload = '''love.graphics.setColor( love.math.colorFromBytes(190, 190, 190, textFade))
+love.graphics.print("Red Army Mod loaded!", 500, 525)
+'''
+[[patches]] 
+[patches.pattern]
+id = "rkka:introDate"
+target = "drawFiles.lua"
+pattern = 'love.graphics.printf({{love.math.colorFromBytes(255,255,255,255)}, "June 6, 1944"}, 0, 250, 1280, "center")'
+position = "at"
+payload = '''love.graphics.printf({{love.math.colorFromBytes(255,255,255,255)}, "October 10, 1943"}, 0, 250, 1280, "center")
+'''
+[[patches]] 
+[patches.pattern]
+id = "rkka:IntroOrBat"
+target = "drawFiles.lua"
+pattern = 'love.graphics.printf({{love.math.colorFromBytes(255,255,255,255)}, "Company C, 116th Regiment, 29th div"}, 0, 400, 1280, "center")'
+position = "at"
+payload = '''
+love.graphics.printf({{love.math.colorFromBytes(255,255,255,255)}, "Razvedvzvod, 117th Guards Rifle Regiment, 39th Guards Rifle Division, 8th Guards Army, 3rd Ukrainian Front"}, 0, 400, 1280, "center")
+'''
