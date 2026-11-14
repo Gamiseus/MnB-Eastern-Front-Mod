@@ -1,5 +1,5 @@
 # qm.toml: changes to game code. Only needed for things faction.toml can't do
-# (new skills, new battle conditions, new vehicles). Empty for now.
+# (new skills, new battle conditions, new vehicles).
 # Guide: QuarterMaster modding wiki, Part 4.
 
 [manifest]
@@ -9,7 +9,7 @@ version = "1.0.0"
 # Remove the "# " to turn it on.
 # [[patches]]
 # [patches.pattern]
-# id = "eastern_front:hello"
+# id = "rkka:hello"
 # target = "main.lua"
 # pattern = 'require "includes/directives"'
 # position = "after"
@@ -20,7 +20,7 @@ version = "1.0.0"
 [[patches]]
 [patches.pattern]
 id = "rkka:hello"
-target = "drawFiles.lua"
+target = "includes/drawFiles.lua"
 pattern = 'love.graphics.print("URB and the MNB community presents", 500, 490)'
 position = "after"
 payload = '''love.graphics.setColor( love.math.colorFromBytes(190, 190, 190, textFade))
@@ -29,7 +29,7 @@ love.graphics.print("Red Army Mod loaded!", 500, 525)
 [[patches]] 
 [patches.pattern]
 id = "rkka:introDate"
-target = "drawFiles.lua"
+target = "includes/drawFiles.lua"
 pattern = 'love.graphics.printf({{love.math.colorFromBytes(255,255,255,255)}, "June 6, 1944"}, 0, 250, 1280, "center")'
 position = "at"
 payload = '''love.graphics.printf({{love.math.colorFromBytes(255,255,255,255)}, "October 10, 1943"}, 0, 250, 1280, "center")
@@ -37,7 +37,7 @@ payload = '''love.graphics.printf({{love.math.colorFromBytes(255,255,255,255)}, 
 [[patches]] 
 [patches.pattern]
 id = "rkka:IntroOrBat"
-target = "drawFiles.lua"
+target = "includes/drawFiles.lua"
 pattern = 'love.graphics.printf({{love.math.colorFromBytes(255,255,255,255)}, "Company C, 116th Regiment, 29th div"}, 0, 400, 1280, "center")'
 position = "at"
 payload = '''
@@ -57,7 +57,7 @@ love.graphics.printf({{love.math.colorFromBytes(255,255,255,255)}, "Razvedvzvod,
 # 1. May he fire? A primary AT rifle needs ammo in the weapon, not atRifleShot.
 [[patches]]
 [patches.regex]
-id = "eastern_front:primary_at_can_fire"
+id = "rkka:primary_at_can_fire"
 name = "Primary AT rifle: fires on its own ammo"
 target = ["includes/urb_engine.lua", "includes/ai.lua"]
 pattern = '\(\(player\.deployedTroops\[idz\]\.weapon\.ammo > 0 and player\.deployedTroops\[idz\]\.weapon\.class ~= "atRifle"\) or \(player\.deployedTroops\[idz\]\.weapon\.class == "atRifle" and player\.deployedTroops\[idz\]\.atRifleShot > 0\)\)'
@@ -68,7 +68,7 @@ times = 1
 # 2. After a shot: a primary AT rifle loses one round from the weapon, like any other gun.
 [[patches]]
 [patches.pattern]
-id = "eastern_front:primary_at_uses_ammo"
+id = "rkka:primary_at_uses_ammo"
 name = "Primary AT rifle: a shot costs weapon ammo"
 target = ["includes/urb_engine.lua", "includes/ai.lua"]
 pattern = """
@@ -87,7 +87,7 @@ if(player.deployedTroops[idz].weapon.class == "atRifle" and not player.deployedT
 # 3. Out of ammo: a primary AT rifle reloads instead of being thrown away.
 [[patches]]
 [patches.pattern]
-id = "eastern_front:primary_at_reloads"
+id = "rkka:primary_at_reloads"
 name = "Primary AT rifle: reloads when empty"
 target = ["includes/urb_engine.lua", "includes/ai.lua"]
 pattern = """
@@ -106,7 +106,7 @@ if(player.deployedTroops[idz].weapon.class == "atRifle" and not player.deployedT
 # 4. The "N shots left" text is for item AT rifles only.
 [[patches]]
 [patches.regex]
-id = "eastern_front:primary_at_no_shots_left_text"
+id = "rkka:primary_at_no_shots_left_text"
 name = "Primary AT rifle: no 'shots left' text"
 target = ["includes/urb_engine.lua", "includes/ai.lua"]
 pattern = 'floatyText\(player\.deployedTroops\[idz\], player\.deployedTroops\[idz\]\.atRifleShot\.\." shots left"\)'
@@ -118,7 +118,7 @@ times = 1
 #    on vehicles burst. Primary AT rifles get both too.
 [[patches]]
 [patches.regex]
-id = "eastern_front:primary_at_boys_effects"
+id = "rkka:primary_at_boys_effects"
 name = "Primary AT rifle: Boys hit effects"
 target = "includes/urb_engine.lua"
 pattern = 'shooter\.weapon\.tag == "boysRifle"'
