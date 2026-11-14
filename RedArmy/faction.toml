@@ -312,7 +312,7 @@ description = "DT, compact Degtyarev tank machine gun adapted for infantry use. 
 top_sprite = "weapons/top_dt.png"
 side_sprite = "weapons/side_dt.png"
 sound = "brenSound"
-mag_sprite = "dtMag"
+mag_sprite = "dpMag"          # change to "dtMag" once misc/dtMag.png is in and its line in [sprites] is on
 stats = { action = "auto", class = "lmg", ammo = 63, maxAmmo = 63, range = 375, damage = 95, recoil = 11, bulk = 18, rof = 10, rofTime = 0.109, jam = 7, rgCapable = 0 }
 
 # ---- Sniper rifles ----
@@ -361,7 +361,20 @@ mag_sprite = "genericMag"
 stats = { action = "bolt", ammo = 5, maxAmmo = 5, range = 600, damage = 120, recoil = 15, bulk = 15, rof = 10, rofTime = 99, jam = 2, rgCapable = 0 }
 
 # ---- Anti-tank rifles ----
-# The lend-lease Boys is the vanilla "boysRifle", unchanged, so it needs no entry.
+# PRIMARY AT rifles: main weapons that use their own ammo and reload (code in qm.toml, tags
+# listed in hooks.lua). The vanilla "boysRifle" stays what it is in the game: a picked-up
+# extra with 10 shots. So the AT Rifleman's lend-lease Boys is its own weapon, "boysAT".
+[[weapons]]
+tag = "boysAT"
+based_on = "boysRifle"
+name = "Boys AT Rifle"
+description = "Boys .55 anti-tank rifle from lend-lease. Punches through cover at a very good range. Extremely heavy."
+# top_sprite = "weapons/top_boysAT.png"      # until the art is in, it uses the game's Boys art
+# side_sprite = "weapons/side_boysAT.png"
+sound = "atRifleSound"
+mag_sprite = "genericMag"
+stats = { action = "bolt", class = "atRifle", ammo = 10, maxAmmo = 10, range = 800, damage = 200, recoil = 25, bulk = 30, rof = 1, rofTime = 99, jam = 5, rgCapable = 0 }
+
 [[weapons]]
 tag = "ptrd"
 based_on = "boysRifle"
@@ -469,7 +482,7 @@ m1CarbinePara = "mosin44"
 [sprites]
 dpMag = "misc/dpMag.png"
 ppsMag = "misc/ppsMag.png"
-dtMag = "misc/dtMag.png"
+# dtMag = "misc/dtMag.png"     # the file is not in misc/ yet; a missing file stops the whole faction loading
 
 # PLACEHOLDER: not decided. Until these are set, the game still hands out BARs and Thompsons.
 # m1919 = "dt"
@@ -564,10 +577,7 @@ skills = [
 [classes.sapper]             # vanilla Sapper
 name = "AT Rifleman"
 start_weapon = "mosin44"
-# Switched off: the game only lets a soldier fire an AT rifle as a picked-up extra (10 shots).
-# Given as a main weapon it never fires and turns into a K98. Needs the "primary AT" code
-# patch from the planning doc first. Until then the vanilla upgrades stay (Sten, M3, Thompson).
-# unlocks = ["ptrd", "boysRifle", "ptrs"]
+unlocks = ["ptrd", "boysAT", "ptrs"]         # primary AT rifles, see the anti-tank rifles section
 
 [classes.intel]              # vanilla Intel
 name = "Diversant"

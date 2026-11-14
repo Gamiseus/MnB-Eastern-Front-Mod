@@ -12,6 +12,10 @@ My personal preference is the second choice, following the 8th Guards Army from 
 Finalised version: 117th Guards Rifle Regiment, 39th Guards Rifle Division  
 [https\://pamyat-naroda.ru/warunit/id10792/](https://pamyat-naroda.ru/warunit/id10792/) (Div.) and [https\://pamyat-naroda.ru/warunit/id14554/](https://pamyat-naroda.ru/warunit/id14554/) (Polk.)
 
+**10 October, 1943**
+
+**Razvedvzvod, 117th Guards Rifle Regiment, 39th Guards Rifle Division, 8th Guards Army, 3rd Ukrainian Front**
+
 **Campaign Maps**
 
 | Maps | Dates / days | Setting | Vanilla Ananogue |
@@ -33,6 +37,14 @@ Finalised version: 117th Guards Rifle Regiment, 39th Guards Rifle Division
 
 **Generic Design Ideas**  
 Rapid soldier XP progression in Eastern Front mod? XP gain is quicker, but in return veterancy saves are harder to obtain (e.g. taking like 15 instead of 10 patrols to gain the second vet save). This allows the player to experience across the classes and their respective weapons and skills quicker, and also reflect the very high casualty turnover rate in Eastern Front.
+
+we won't what any of these changes do to gameplay/balance unless we try em out first. Lets stick with a few values and go with em at first.
+
+proposal:  
+\- 30/35/40/45 combat from promotions  
+\- increase XP gain rate to 1xp per 8 hp dealt  
+\- increase XP gain from hth kill from 2 to 4  
+\- remove the class stacking punishment
 
 # Class Specialisation
 

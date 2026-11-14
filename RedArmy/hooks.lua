@@ -1,6 +1,11 @@
 -- hooks.lua: small bits of code for things faction.toml can't say.
--- PLACEHOLDER: all three functions are empty. Fill in or delete the ones you don't need.
+-- PLACEHOLDER: on_enable and on_soldier_created are empty. Fill in or delete them.
 local H = {}
+
+-- Primary AT rifles: a soldier's main weapon, using its own ammo and reloading like any gun.
+-- The code patches in qm.toml look for weapon.primaryAT. To make another weapon a primary
+-- AT rifle, give it class = "atRifle" in faction.toml and add its tag here.
+local PRIMARY_AT = { ptrd = true, ptrs = true, boysAT = true }
 
 -- Runs once, after the faction is applied.
 function H.on_enable(faction)
@@ -13,6 +18,8 @@ end
 
 -- Runs after every weapon is built. tag is the weapon's tag, e.g. "mosin".
 function H.on_weapon_created(weapon, tag)
+  -- A weapon table is reused when a soldier changes guns, so the flag is set or cleared every time.
+  weapon.primaryAT = PRIMARY_AT[weapon.tag] or nil
 end
 
 return H
