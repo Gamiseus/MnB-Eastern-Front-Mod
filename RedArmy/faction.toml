@@ -140,7 +140,7 @@ stats = { action = "bolt", ammo = 5, maxAmmo = 5, range = 400, damage = 80, reco
 tag = "berdan"
 based_on = "g98"
 name = "Berdan II"
-description = "Berdan II, an obsolete single-shot rifle found among Partizans. Fires a powerful 10.7mm black-powder cartridge, but requires reloading after every shot."
+description = "Berdan II, an obsolete single-shot rifle now found among Partizans. Fires a powerful .42 black-powder cartridge, but requires reloading after every shot."
 # top_sprite = "weapons/top_berdan.png"
 # side_sprite = "weapons/side_berdan.png"
 sound = "g98Sound"
