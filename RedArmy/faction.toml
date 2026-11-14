@@ -580,7 +580,7 @@ unlocks = ["ptrd", "boysAT", "ptrs"]         # primary AT rifles, see the anti-t
 
 [classes.intel]              # vanilla Intel
 name = "Diversant"
-start_weapon = "tozB"
+start_weapon = "shotgun"
 unlocks = ["ppshObrez", "mp40", "stg44"]
 
 
