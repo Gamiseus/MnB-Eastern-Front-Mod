@@ -312,7 +312,7 @@ description = "DT, compact Degtyarev tank machine gun adapted for infantry use. 
 top_sprite = "weapons/top_dt.png"
 side_sprite = "weapons/side_dt.png"
 sound = "brenSound"
-mag_sprite = "dpMag"          # change to "dtMag" once misc/dtMag.png is in and its line in [sprites] is on
+mag_sprite = "dtMag"
 stats = { action = "auto", class = "lmg", ammo = 63, maxAmmo = 63, range = 375, damage = 95, recoil = 11, bulk = 18, rof = 10, rofTime = 0.109, jam = 7, rgCapable = 0 }
 
 # ---- Sniper rifles ----
@@ -403,8 +403,8 @@ tag = "tozB"
 based_on = "shotgun"
 name = "TOZ-B"
 description = "TOZ-B, double-barrel hunting shotgun, now primarily used by partisans. Close-range little marvel and capable of a quick second shot."
-# top_sprite = "weapons/top_tozB.png"
-# side_sprite = "weapons/side_tozB.png"
+top_sprite = "weapons/top_tozB.png"
+side_sprite = "weapons/side_tozB.png"
 sound = "shotGunSound"
 mag_sprite = "genericMag"
 stats = { action = "semi", ammo = 2, maxAmmo = 2, range = 300, damage = 200, recoil = 20, bulk = 5, rof = 1, rofTime = 99, jam = 2, rgCapable = 0 }
@@ -482,7 +482,7 @@ m1CarbinePara = "mosin44"
 [sprites]
 dpMag = "misc/dpMag.png"
 ppsMag = "misc/ppsMag.png"
-# dtMag = "misc/dtMag.png"     # the file is not in misc/ yet; a missing file stops the whole faction loading
+dtMag = "misc/dtMag.png"
 
 # PLACEHOLDER: not decided. Until these are set, the game still hands out BARs and Thompsons.
 # m1919 = "dt"

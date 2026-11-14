@@ -1,9 +1,49 @@
 # qm.toml: changes to game code. Only needed for things faction.toml can't do
-# (new skills, new battle conditions, new vehicles).
+# (new skills, new battle conditions, new vehicles). Empty for now.
 # Guide: QuarterMaster modding wiki, Part 4.
 
 [manifest]
 version = "1.0.0"
+
+# PLACEHOLDER example patch: prints one line to the log when the game starts.
+# Remove the "# " to turn it on.
+# [[patches]]
+# [patches.pattern]
+# id = "eastern_front:hello"
+# target = "main.lua"
+# pattern = 'require "includes/directives"'
+# position = "after"
+# payload = '''
+# print("[Eastern Front] loaded")
+# '''
+
+[[patches]]
+[patches.pattern]
+id = "rkka:hello"
+target = "drawFiles.lua"
+pattern = 'love.graphics.print("URB and the MNB community presents", 500, 490)'
+position = "after"
+payload = '''love.graphics.setColor( love.math.colorFromBytes(190, 190, 190, textFade))
+love.graphics.print("Red Army Mod loaded!", 500, 525)
+'''
+[[patches]] 
+[patches.pattern]
+id = "rkka:introDate"
+target = "drawFiles.lua"
+pattern = 'love.graphics.printf({{love.math.colorFromBytes(255,255,255,255)}, "June 6, 1944"}, 0, 250, 1280, "center")'
+position = "at"
+payload = '''love.graphics.printf({{love.math.colorFromBytes(255,255,255,255)}, "October 10, 1943"}, 0, 250, 1280, "center")
+'''
+[[patches]] 
+[patches.pattern]
+id = "rkka:IntroOrBat"
+target = "drawFiles.lua"
+pattern = 'love.graphics.printf({{love.math.colorFromBytes(255,255,255,255)}, "Company C, 116th Regiment, 29th div"}, 0, 400, 1280, "center")'
+position = "at"
+payload = '''
+love.graphics.printf({{love.math.colorFromBytes(255,255,255,255)}, "Razvedvzvod, 117th Guards Rifle Regiment, 39th Guards Rifle Division, 8th Guards Army, 3rd Ukrainian Front"}, 0, 400, 1280, "center")
+'''
+
 
 # ============================== PRIMARY AT RIFLES ==============================
 # In the vanilla game an AT rifle is an extra item: it has 10 shots (atRifleShot), never
