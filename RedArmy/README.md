@@ -9,8 +9,8 @@ It is a template: the structure is complete, much of the content is still placeh
 |---|---|
 | `mod.json` | Who the mod is: id, name, version. |
 | `faction.toml` | The army: names, text, weapons, classes, vehicles. Most work happens here. |
-| `qm.toml` | Code patches for things `faction.toml` can't do. Holds the primary AT rifle patches. |
-| `hooks.lua` | Small Lua hooks. Marks the primary AT rifles. |
+| `qm.toml` | Code patches for things `faction.toml` can't do. Holds the primary AT rifle and suppressed weapon patches. |
+| `hooks.lua` | Small Lua hooks. Marks the primary AT rifles and the suppressed weapons. |
 | `names/` | Soldier name lists, one name per line. |
 | `units/<unit>/` | Soldier art, one image per animation frame (`idle.png`, `aim.png` ...). |
 | `weapons/` | Weapon art: `top_<tag>.png` (in hand) and `side_<tag>.png` (in menus). Sounds go here too. |

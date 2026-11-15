@@ -143,20 +143,20 @@ stats = { action = "bolt", ammo = 5, maxAmmo = 5, range = 400, damage = 80, reco
 tag = "berdan"
 based_on = "g98"
 name = "Berdan II"
-description = "Berdan II, an obsolete single-shot rifle found among Partizans. Fires a powerful black-powder cartridge, but requires reloading after every shot."
-# top_sprite = "weapons/top_berdan.png"
-# side_sprite = "weapons/side_berdan.png"
+description = "Berdan II, an obsolete single-shot rifle now found among Partizans. Fires a powerful .42 black-powder cartridge, but requires reloading after every shot."
+top_sprite = "weapons/top_berdan.png"
+side_sprite = "weapons/side_berdan.png"
 sound = "g98Sound"
 mag_sprite = "genericMag"
-stats = { action = "bolt", ammo = 1, maxAmmo = 1, range = 300, damage = 120, recoil = 15, bulk = 12.6, rof = 10, rofTime = 99, jam = 10, rgCapable = 0 }
+stats = { action = "bolt", ammo = 1, maxAmmo = 1, range = 300, damage = 150, recoil = 15, bulk = 12.6, rof = 10, rofTime = 99, jam = 10, rgCapable = 0 }
 
 [[weapons]]
 tag = "mosinBramit"
 based_on = "springfield"
 name = "Mosin BraMit"
 description = "Mosin M91/30 fitted with a Bramit suppressor. Reduced-velocity ammunition softens recoil, at the cost of range and damage."
-# top_sprite = "weapons/top_mosinBramit.png"
-# side_sprite = "weapons/side_mosinBramit.png"
+top_sprite = "weapons/top_mosinBramit.png"
+side_sprite = "weapons/side_mosinBramit.png"
 sound = "sten5Sound"
 mag_sprite = "genericMag"
 stats = { action = "bolt", ammo = 5, maxAmmo = 5, range = 350, damage = 90, recoil = 10, bulk = 13, rof = 10, rofTime = 99, jam = 5, rgCapable = 0 }
@@ -266,8 +266,8 @@ tag = "ppdBramit"
 based_on = "stenMKVI"
 name = "PPD BraMit (box)"
 description = "PPD fitted with a Bramit suppressor and a 25-round box magazine. Fast, low-recoil fire at close range, but limited capacity and reduced damage."
-# top_sprite = "weapons/top_ppdBramit.png"
-# side_sprite = "weapons/side_ppdBramit.png"
+top_sprite = "weapons/top_ppdBramit.png"
+side_sprite = "weapons/side_ppdBramit.png"
 sound = "sten5Sound"
 mag_sprite = "m1CarbineMag"
 stats = { action = "auto", class = "smg", ammo = 25, maxAmmo = 25, range = 200, damage = 65, recoil = 5, bulk = 9, rof = 15, rofTime = 0.075, jam = 11, rgCapable = 0 }
@@ -277,8 +277,8 @@ tag = "ppdBramitDrum"
 based_on = "stenMKVI"
 name = "PPD BraMit (Drum)"
 description = "PPD fitted with a Bramit suppressor and a drum. Ample ammunition for silent close-range fire, but bulkier and more prone to stoppages due to drum feed."
-# top_sprite = "weapons/top_ppdBramitDrum.png"
-# side_sprite = "weapons/side_ppdBramitDrum.png"
+top_sprite = "weapons/top_ppdBramitDrum.png"
+side_sprite = "weapons/side_ppdBramitDrum.png"
 sound = "sten5Sound"
 mag_sprite = "ppshMag"
 stats = { action = "auto", class = "smg", ammo = 65, maxAmmo = 65, range = 200, damage = 65, recoil = 5, bulk = 10.5, rof = 15, rofTime = 0.075, jam = 14, rgCapable = 0 }
@@ -402,14 +402,13 @@ stats = { action = "semi", class = "atRifle", ammo = 5, maxAmmo = 5, range = 100
 
 # ---- Special and crate guns ----
 [[weapons]]
-tag = "tozB"
-based_on = "shotgun"
+reskin = "shotgun"
 name = "TOZ-B"
 description = "TOZ-B, double-barrel hunting shotgun, now primarily used by partisans. Close-range little marvel and capable of a quick second shot."
 top_sprite = "weapons/top_tozB.png"
 side_sprite = "weapons/side_tozB.png"
 sound = "shotGunSound"
-mag_sprite = "genericMag"
+mag_sprite = "shell"
 stats = { action = "semi", ammo = 2, maxAmmo = 2, range = 300, damage = 200, recoil = 20, bulk = 5, rof = 1, rofTime = 99, jam = 2, rgCapable = 0 }
 
 [[weapons]]
@@ -455,7 +454,7 @@ stats = { action = "auto", class = "lmg", ammo = 250, maxAmmo = 250, range = 375
 # allied, allied_sniper, grunt, para, resistance, smg, axis, axis_crew.
 # REAL: the three partisan weapons from the stats sheet. The vanilla pool already has the MP 40.
 [pools.resistance]           # weapons of the partisans (the vanilla French unit)
-add = ["berdan", "tozB", "ppshObrez"]
+add = ["berdan", "shotgun", "ppshObrez"]
 # remove = ["shotgun", "sten", "bren"]       # PLACEHOLDER: vanilla guns to take out of the pool
 
 # PLACEHOLDER: nothing decided for the other pools.
@@ -592,7 +591,7 @@ unlocks = ["ptrd", "boysAT", "ptrs"]         # primary AT rifles, see the anti-t
 
 [classes.intel]              # vanilla Intel
 name = "Diversant"
-start_weapon = "tozB"
+start_weapon = "shotgun"
 unlocks = ["ppshObrez", "mp40", "stg44"]
 
 

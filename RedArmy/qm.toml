@@ -128,3 +128,19 @@ pattern = 'shooter\.weapon\.tag == "boysRifle"'
 position = "at"
 payload = '(shooter.weapon.tag == "boysRifle" or shooter.weapon.primaryAT)'
 times = 2
+
+
+# ============================== SUPPRESSED WEAPONS ==============================
+# In the vanilla game only the Sten MkVI (by its tag) can fire without breaking the stealth
+# or camo buff. Each shot rolls: 5% per enemy who can see the shooter to be revealed.
+# A weapon marked with   weapon.suppressed = true   (set in hooks.lua, by weapon tag)
+# gets the same roll. based_on = "stenMKVI" alone does not do it.
+[[patches]]
+[patches.regex]
+id = "rkka:suppressed_keeps_stealth"
+name = "Suppressed weapons: firing can keep stealth"
+target = "includes/urb_engine.lua"
+pattern = 'player\.deployedTroops\[idz\]\.weapon\.tag ~= "stenMKVI" or stenStealth'
+position = "at"
+payload = '(player.deployedTroops[idz].weapon.tag ~= "stenMKVI" and not player.deployedTroops[idz].weapon.suppressed) or stenStealth'
+times = 1

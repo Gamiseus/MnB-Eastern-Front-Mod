@@ -7,6 +7,10 @@ local H = {}
 -- AT rifle, give it class = "atRifle" in faction.toml and add its tag here.
 local PRIMARY_AT = { ptrd = true, ptrs = true, boysAT = true }
 
+-- Suppressed weapons: firing does not always break the stealth or camo buff (the Sten MkVI
+-- rule). The code patch in qm.toml looks for weapon.suppressed. Add a weapon's tag here.
+local SUPPRESSED = { mosinBramit = true, ppdBramit = true, ppdBramitDrum = true }
+
 -- Runs once, after the faction is applied.
 function H.on_enable(faction)
 end
@@ -20,6 +24,7 @@ end
 function H.on_weapon_created(weapon, tag)
   -- A weapon table is reused when a soldier changes guns, so the flag is set or cleared every time.
   weapon.primaryAT = PRIMARY_AT[weapon.tag] or nil
+  weapon.suppressed = SUPPRESSED[weapon.tag] or nil
 end
 
 return H
