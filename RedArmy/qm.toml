@@ -1,5 +1,11 @@
+<<<<<<< Updated upstream
 # qm.toml: changes to game code. Only needed for things faction.toml can't do
 # (new skills, new battle conditions, new vehicles).
+=======
+# qm.toml: changes to game code, for things faction.toml can't do.
+# Holds: the intro screen text, the Strelok grenade, primary AT rifles, suppressed weapons,
+#        the bayonet thrust, a melee skill fix.
+>>>>>>> Stashed changes
 # Guide: QuarterMaster modding wiki, Part 4.
 
 [manifest]
@@ -44,34 +50,60 @@ payload = '''
 love.graphics.printf({{love.math.colorFromBytes(255,255,255,255)}, "Razvedvzvod, 117th Guards Rifle Regiment, 39th Guards Rifle Division, 8th Guards Army, 3rd Ukrainian Front"}, 0, 400, 1280, "center")
 '''
 
-# Strelok-1 Frag
-# currently only copies the Avto-2 frag
-# TODO update a new explosive
+# ============================== STRELOK SKILL 1: GRENADE ==============================
+# The Strelok's first skill (vanilla: AP rounds) becomes a grenade throw.
+# It reuses the Avtomatchik's grenade (his skill 2). TODO: its own explosive.
 
+# 1. The click: open the "where to throw" prompt. Replaces the whole AP rounds block, so
+#    its buff sound and voice line no longer play, and the cooldown no longer starts here.
 [[patches]]
 [patches.pattern]
 id = "rkka:strelok1frag_copy"
-target = "urb_engine.lua"
-pattern = 'buffer(player.deployedTroops[convertedId(specID)], "AP rounds")'
+name = "Strelok skill 1: grenade prompt"
+target = "includes/urb_engine.lua"
+pattern = """
+buffer(player.deployedTroops[convertedId(specID)], "AP rounds")
+-- play a lil buff sound
+local buff_sfx2
+--load the proper sound for the gun
+buff_sfx2 = buffSound:clone()
+buff_sfx2:play()
+player.deployedTroops[convertedId(specID)].skill1Timer = 180
+--
+local clone_sfx4
+clone_sfx4 = _G["apTalk"..randNbr(6)]:clone()
+clone_sfx4:setVolume(stepScale(player.deployedTroops[convertedId(specID)])/3)
+clone_sfx4:setPitch( ((90 + randNbr(10))/100))
+clone_sfx4:play()
+"""
 position = "at"
-payload = '''
+match_indent = true
+times = 1
+payload = """
 mousePrompt = 2
 mousePrompter = specID
 mousePromptLock = 1
-'''
+"""
 
+# 2. The throw: the game puts skill 2 on a 120 sec cooldown (it is the Avtomatchik's skill 2).
+#    For the Strelok the grenade is skill 1, so his skill 1 gets the cooldown: 90 sec.
+#    Change the 90 here to change the cooldown.
 [[patches]]
 [patches.pattern]
 id = "rkka:strelok1frag_time"
-target = "urb_engine.lua"
-pattern = 'player.deployedTroops[convertedId(specID)].skill1Timer = 180'
+name = "Strelok skill 1: grenade cooldown"
+target = "includes/urb_engine.lua"
+pattern = 'player.deployedTroops[foo].skill2Timer = 120'
 position = "at"
-payload = '''
-player.deployedTroops[convertedId(specID)].skill1Timer = 90
-'''
-times = 1 # be very careful with this because theres tech 2 timers which r set to 3 mins long? and it could fuck up the other one im not sure it does further testing warranted s89
-
-
+match_indent = true
+times = 1
+payload = """
+if(player.deployedTroops[foo].spec == "rifle") then
+  player.deployedTroops[foo].skill1Timer = 90
+else
+  player.deployedTroops[foo].skill2Timer = 120
+end
+"""
 
 
 # I need to somehow replace the first skill of the Strelok with the Limonka...
@@ -174,3 +206,178 @@ pattern = 'player\.deployedTroops\[idz\]\.weapon\.tag ~= "stenMKVI" or stenSteal
 position = "at"
 payload = '(player.deployedTroops[idz].weapon.tag ~= "stenMKVI" and not player.deployedTroops[idz].weapon.suppressed) or stenStealth'
 times = 1
+
+
+# ============================== BAYONET THRUST ==============================
+# In the vanilla game every melee attack is a rifle-butt swing. With these patches a soldier
+# holding one of the weapons listed below does a straight bayonet thrust instead.
+# Every other weapon keeps the normal swing. This is looks only: it does not change damage.
+#
+# HOW TO USE IT: edit the list in patch 1 below. Nothing else needs touching.
+#
+# WHICH SPRITE, "top" OR "side"?
+#   "top"   the weapon's top_<tag>.png, the one you see while he aims. It already points
+#           straight ahead, so it is drawn exactly as when aiming, only slid back and forth.
+#           Pick this unless you have a reason not to. The bayonet must be visible in the
+#           top sprite, or the thrust shows a plain rifle.
+#   "side"  the weapon's side_<tag>.png, the menu picture (muzzle to the left). It is turned
+#           to point ahead. Bigger and more detailed, but it shows the gun from the side.
+#
+# SOLDIER ART (optional): the thrust has four steps. If these images exist, a thrusting
+# soldier uses them; if not, he uses the normal attack frames. Add them in faction.toml
+# under [sprites], one set per unit (allied, sarge, para, french):
+#   allied_thrust1 = "units/thrust/allied_thrust1.png"   # wind-up
+#   allied_thrust2 = "units/thrust/allied_thrust2.png"   # the stab
+#   allied_thrust3 = "units/thrust/allied_thrust3.png"   # the stab, held
+#   allied_thrust4 = "units/thrust/allied_thrust4.png"   # pulling back
+# Same size as the other soldier frames (100x100).
+
+# 1. The list and the settings.
+[[patches]]
+[patches.pattern]
+id = "rkka:bayonet_setup"
+name = "Bayonet thrust: weapon list and settings"
+target = "includes/drawFiles.lua"
+pattern = 'function drawState0()'
+position = "before"
+times = 1
+payload = """
+-- Weapons that thrust: weapon tag = "top" or "side" (which sprite to draw, see above).
+rkkaBayonet = {
+  mosin44 = "top",
+  -- mosin = "top",
+}
+-- How far the weapon slides, in pixels. Bigger = further.
+rkkaThrustBack = 8        -- pulled back for the wind-up and the recovery
+rkkaThrustReach = 16      -- pushed forward for the stab
+
+rkkaThrustStep = { attack1 = 1, attack2 = 2, attack3 = 3, attack4 = 4 }
+
+-- Which sprite kind a soldier thrusts with right now, or nil when he is not thrusting.
+function rkkaThrusting(soldier)
+  if(rkkaThrustStep[soldier.state] == nil or soldier.weapon == nil) then
+    return nil
+  end
+  return rkkaBayonet[soldier.weapon.tag]
+end
+
+-- The soldier image: a thrust frame when there is one, else the normal frame.
+function rkkaFrame(soldier)
+  if(rkkaThrusting(soldier) ~= nil) then
+    local img = _G[soldier.tag.."_thrust"..rkkaThrustStep[soldier.state]]
+    if(img ~= nil) then
+      return img
+    end
+  end
+  -- (spaced differently from the game on purpose, so patch 4 leaves this line alone)
+  return _G[soldier.tag .. "_" .. soldier.state]
+end
+
+-- The weapon image for the melee states: top sprite for a "top" thrust, else the side sprite.
+function rkkaMeleeGun(soldier)
+  if(rkkaThrusting(soldier) == "top" and _G["top_"..soldier.weapon.tag] ~= nil) then
+    return _G["top_"..soldier.weapon.tag]
+  end
+  -- (spaced differently from the game on purpose, so patch 3 leaves this line alone)
+  return _G["side_" .. soldier.weapon.tag]
+end
+
+"""
+
+# 2. Where the weapon sits: straight ahead, slid back or forward.
+[[patches]]
+[patches.pattern]
+id = "rkka:bayonet_pose"
+name = "Bayonet thrust: weapon position"
+target = "includes/drawFiles.lua"
+pattern = 'if(soldier.faction == "axis" and soldier.flagged < 2.5) then'
+position = "before"
+match_indent = true
+times = 1
+payload = """
+if(rkkaThrusting(soldier) ~= nil) then
+  -- forward is minus, back is plus
+  local rkkaSlide = -rkkaThrustReach
+  if(soldier.state == "attack1" or soldier.state == "attack4") then
+    rkkaSlide = rkkaThrustBack
+  end
+  if(rkkaThrusting(soldier) == "top") then
+    -- same as aiming: no turn, full size
+    angleAdjust = 0
+    xScaleAdjust = 1
+    yScaleAdjust = 1
+    xAdjust = 0
+    yAdjust = rkkaSlide
+  else
+    -- side sprite: turned so the muzzle points ahead, at the usual melee size
+    angleAdjust = math.rad(-90)
+    xScaleAdjust = 0.7
+    yScaleAdjust = 0.8
+    xAdjust = -rkkaSlide
+    yAdjust = 0
+  end
+end
+"""
+
+# 3. Which weapon image is drawn in the melee states.
+[[patches]]
+[patches.regex]
+id = "rkka:bayonet_gun_image"
+name = "Bayonet thrust: weapon image"
+target = "includes/drawFiles.lua"
+pattern = '_G\["side_"\.\.soldier\.weapon\.tag\]'
+position = "at"
+payload = 'rkkaMeleeGun(soldier)'
+times = 3
+
+# 4. Which soldier image is drawn.
+[[patches]]
+[patches.regex]
+id = "rkka:bayonet_soldier_image"
+name = "Bayonet thrust: soldier image"
+target = "includes/drawFiles.lua"
+pattern = '_G\[soldier\.tag\.\."_"\.\.soldier\.state\]'
+position = "at"
+payload = 'rkkaFrame(soldier)'
+times = 7
+
+
+# ============================== MELEE SKILL FIX ==============================
+# A vanilla bug in cqc(). In melee a German is meant to fight with skill 30 + 15 per
+# difficulty level. The game writes that number into his real skill, after it has already
+# copied the old skill for the fight. So his first melee used his shooting skill, and his
+# shooting skill was replaced for the rest of the map.
+# Fixed here: the melee number is used for the fight and his own skill is left alone.
+# Delete this patch to get the vanilla behaviour back.
+[[patches]]
+[patches.pattern]
+id = "rkka:cqc_skill_fix"
+name = "Melee: Germans use their melee skill, shooting skill untouched"
+target = "includes/urb_engine.lua"
+pattern = """
+if(attacker.faction == "axis") then
+attacker.skill = 30 + (player.diff * 15)
+end
+if(defender.faction == "axis") then
+defender.skill = 30 + (player.diff * 15)
+end
+--
+if(attacker.spec == "commando") then
+aSkill = attacker.skill + 10
+end
+"""
+position = "at"
+match_indent = true
+times = 1
+payload = """
+if(attacker.faction == "axis") then
+  aSkill = 30 + (player.diff * 15)
+end
+if(defender.faction == "axis") then
+  dSkill = 30 + (player.diff * 15)
+end
+--
+if(attacker.spec == "commando") then
+  aSkill = aSkill + 10
+end
+"""
