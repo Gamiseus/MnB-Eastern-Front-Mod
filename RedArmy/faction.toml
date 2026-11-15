@@ -482,13 +482,6 @@ tommy = "ppsh41"
 m1Carbine = "mosin38"
 m1CarbinePara = "mosin44"
 
-[sprites]
-dpMag = "misc/dpMag.png"
-ppsMag = "misc/ppsMag.png"
-dtMag = "misc/dtMag.png"
-limonka = "misc/limonka.png"
-frag = "misc/rg42.png"
-
 # PLACEHOLDER: not decided. Until these are set, the game still hands out BARs and Thompsons.
 # m1919 = "dt"
 # scopedGarand = "scopedSvt40"
@@ -608,9 +601,15 @@ map = { hurt = "alliedHurt" }                # lets us name files hurt1.wav inst
 
 # ============================== SPRITES AND SOUNDS ==============================
 # Replaces any other game image or sound by its name, only while this faction is on.
-# PLACEHOLDER: examples only. The file must exist before a line is switched on.
-
-# parachuteAllied = "misc/parachute.png"
+# REAL: our own magazine and grenade images. mag_sprite in WEAPONS uses the magazine names.
+# The file must exist before a line is switched on.
+[sprites]
+dpMag = "misc/dpMag.png"
+ppsMag = "misc/ppsMag.png"
+dtMag = "misc/dtMag.png"
+limonka = "misc/limonka.png"
+frag = "misc/rg42.png"
+# parachuteAllied = "misc/parachute.png"     # PLACEHOLDER example
 
 [sounds]
 # airStrike1 = "misc/il2.wav"
@@ -672,6 +671,7 @@ name = "37mm 61-K"
 
 
 # ============================== HOOKS ==============================
-# A Lua file for small things this file can't say. PLACEHOLDER: hooks.lua does nothing yet.
+# A Lua file for small things this file can't say. It marks the primary AT rifles and the
+# suppressed weapons for the patches in qm.toml.
 [hooks]
 lua = "hooks.lua"
