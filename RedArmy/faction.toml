@@ -63,6 +63,9 @@ conditionText_60 = "Uncharacteristically, supply is quite efficient today and de
 # Commander ability: 81mm mortars become 82mm.
 skillText_5 = "82mm Mortars"
 playerSkillText_5 = "82mm Mortars: Call in heavy mortar support. Relatively fast delivery and hard punching. 82mm mortars will deliver 8 rounds + 2 per rarity tiers."
+skillText_12 = "Frunzentsy"
+playerSkillText_12 = "Frunzentsy: You can reroll the 3 command abilities offered during a promotion once per tier. The skill timer will start once you have depleted all your uses."
+
 lootText_ration = "Tushonka, +5 to max health"
 lootText_molotov = "An incendiary bottle. Right click to use once looted."
 # PLACEHOLDER: the doc's Guards ranks. Only the promote buttons are text; the rank names shown
@@ -479,10 +482,13 @@ vicker = "mg42"
 tommy = "ppsh41"
 m1Carbine = "mosin38"
 m1CarbinePara = "mosin44"
+
 [sprites]
 dpMag = "misc/dpMag.png"
 ppsMag = "misc/ppsMag.png"
 dtMag = "misc/dtMag.png"
+limonka = "misc/limonka.png"
+frag = "misc/rg42.png"
 
 # PLACEHOLDER: not decided. Until these are set, the game still hands out BARs and Thompsons.
 # m1919 = "dt"
@@ -507,6 +513,11 @@ dtMag = "misc/dtMag.png"
 name = "Strelok"
 start_weapon = "svt38"
 unlocks = ["svt40", "avs36", "avt40"]
+skills = [
+  "Limonka, Throws an F-1 defensive grenade",                          # doesn't do shit at the moment
+  "B-32 Ammunition, standard-issue API rounds effective against light vehicles",
+  "Senior Rifleman's Rally, nearby soldiers are harder to pin"
+]
 # description = "Medium to long range with semi-automatic rifles."     # PLACEHOLDER
 # bonus = { speed = 0, skill = 5 }                                     # PLACEHOLDER
 # icon = "icons/rifle.png"                                             # PLACEHOLDER

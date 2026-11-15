@@ -44,6 +44,9 @@ payload = '''
 love.graphics.printf({{love.math.colorFromBytes(255,255,255,255)}, "Razvedvzvod, 117th Guards Rifle Regiment, 39th Guards Rifle Division, 8th Guards Army, 3rd Ukrainian Front"}, 0, 400, 1280, "center")
 '''
 
+# I need to somehow replace the first skill of the Strelok with the Limonka...
+# could I patch it?
+
 
 # ============================== PRIMARY AT RIFLES ==============================
 # In the vanilla game an AT rifle is an extra item: it has 10 shots (atRifleShot), never
