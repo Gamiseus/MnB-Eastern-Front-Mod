@@ -1,5 +1,7 @@
 # MnB-Eastern-Front-Mod
-hi -s89
+Total conversion mod for [https://store.steampowered.com/app/1391530/Mud_and_Blood/](Mud and Blood).
+
+Version 0.0.X (pre-release)
 
 # Installing the Eastern Front mod (by hand)
 
