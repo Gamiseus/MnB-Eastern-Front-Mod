@@ -44,6 +44,36 @@ payload = '''
 love.graphics.printf({{love.math.colorFromBytes(255,255,255,255)}, "Razvedvzvod, 117th Guards Rifle Regiment, 39th Guards Rifle Division, 8th Guards Army, 3rd Ukrainian Front"}, 0, 400, 1280, "center")
 '''
 
+# Strelok-1 Frag
+# currently only copies the Avto-2 frag
+# TODO update a new explosive
+
+[[patches]]
+[patches.pattern]
+id = "rkka:strelok1frag_copy"
+target = "urb_engine.lua"
+pattern = 'buffer(player.deployedTroops[convertedId(specID)], "AP rounds")'
+position = "at"
+payload = '''
+mousePrompt = 2
+mousePrompter = specID
+mousePromptLock = 1
+'''
+
+[[patches]]
+[patches.pattern]
+id = "rkka:strelok1frag_time"
+target = "urb_engine.lua"
+pattern = 'player.deployedTroops[convertedId(specID)].skill1Timer = 180'
+position = "at"
+payload = '''
+player.deployedTroops[convertedId(specID)].skill1Timer = 90
+'''
+times = 1 # be very careful with this because theres tech 2 timers which r set to 3 mins long? and it could fuck up the other one im not sure it does further testing warranted s89
+
+
+
+
 # I need to somehow replace the first skill of the Strelok with the Limonka...
 # could I patch it?
 
