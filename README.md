@@ -1,5 +1,5 @@
 # MnB-Eastern-Front-Mod
-Total conversion mod for [https://store.steampowered.com/app/1391530/Mud_and_Blood/](Mud and Blood).
+Total conversion mod for [Mud and Blood](https://store.steampowered.com/app/1391530/Mud_and_Blood/).
 
 Version 0.0.X (pre-release)
 
