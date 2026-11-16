@@ -74,8 +74,8 @@ times = 1 # be very careful with this because theres tech 2 timers which r set t
 # could I patch it?
 
 
+# bipod cooldown 120 -> 10 
 # just for you, moto
-# literally in a tutorial rn
 [[patches]]
 [patches.pattern]
 id = "rkka:fastbipod"
@@ -87,7 +87,26 @@ player.deployedTroops[convertedId(specID)].skill1Timer = 10
 '''
 
 
+#AT rifleman 1 now throws a frag - PLACEHOLDER until replacing mousePrompt 14 with an AT grenade or other method of getting that frag.
+[[patches]]
+[patches.pattern]
+id="rkka:ATnadeskill"
+target = "urb_engine.lua"
+pattern = 'mousePrompt = 14'
+position = "at"
+payload = '''
+mousePrompt = 2
+'''
 
+[[patches]]
+[patches.pattern]
+id="rkka:ATnadetimer"
+target = "main.lua"
+pattern = 'player.deployedTroops[convertedId(mousePrompter)].skill1Timer = 300'
+position = "at"
+payload = '''
+player.deployedTroops[convertedId(mousePrompter)].skill1Timer = 150
+'''
 
 # ============================== PRIMARY AT RIFLES ==============================
 # In the vanilla game an AT rifle is an extra item: it has 10 shots (atRifleShot), never
