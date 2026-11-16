@@ -108,6 +108,17 @@ payload = '''
 player.deployedTroops[convertedId(mousePrompter)].skill1Timer = 150
 '''
 
+[[patches]]
+[patches.pattern]
+id="rkka:saperi"
+target = "main.lua"
+pattern = 'elseif(spec == "engy") then'
+position = "after"
+payload = '''
+  player.deployedTroops[convertedId(specID)].health = player.deployedTroops[convertedId(specID)].health + 20
+  player.deployedTroops[convertedId(specID)].maxHealth = player.deployedTroops[convertedId(specID)].maxHealth + 20
+  player.deployedTroops[convertedId(specID)].speed = player.deployedTroops[convertedId(specID)].speed - 5
+'''
 # ============================== PRIMARY AT RIFLES ==============================
 # In the vanilla game an AT rifle is an extra item: it has 10 shots (atRifleShot), never
 # reloads, and the soldier goes back to his own gun when it is empty.
