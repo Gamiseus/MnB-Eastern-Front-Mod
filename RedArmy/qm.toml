@@ -1,11 +1,6 @@
-<<<<<<< Updated upstream
-# qm.toml: changes to game code. Only needed for things faction.toml can't do
-# (new skills, new battle conditions, new vehicles).
-=======
 # qm.toml: changes to game code, for things faction.toml can't do.
 # Holds: the intro screen text, the Strelok grenade, primary AT rifles, suppressed weapons,
 #        the bayonet thrust, a melee skill fix.
->>>>>>> Stashed changes
 # Guide: QuarterMaster modding wiki, Part 4.
 
 [manifest]
