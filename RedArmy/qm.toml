@@ -70,12 +70,23 @@ payload = '''
 player.deployedTroops[convertedId(specID)].skill1Timer = 90
 '''
 times = 1 # be very careful with this because theres tech 2 timers which r set to 3 mins long? and it could fuck up the other one im not sure it does further testing warranted s89
-
-
-
-
 # I need to somehow replace the first skill of the Strelok with the Limonka...
 # could I patch it?
+
+
+# just for you, moto
+# literally in a tutorial rn
+[[patches]]
+[patches.pattern]
+id = "rkka:fastbipod"
+target = "urb_engine.lua"
+pattern = 'clone_sfx4 = _G["bipodTalk"..randNbr(6)]:clone()'
+position = "after"
+payload = '''
+player.deployedTroops[convertedId(specID)].skill1Timer = 10
+'''
+
+
 
 
 # ============================== PRIMARY AT RIFLES ==============================
